@@ -1,19 +1,20 @@
-from collections import deque
-
 def solution(people, limit):
-    people = deque(sorted(people))  # deque로 변환 후 정렬
+    people.sort()
     answer = 0
-
-    while people:
-        if len(people) == 1:  # 남은 사람이 한 명일 경우
-            people.pop()
-            answer += 1
-        elif people[0] + people[-1] <= limit:  # 가장 가벼운 사람 + 가장 무거운 사람
-            people.popleft()  # 가장 가벼운 사람 제거
-            people.pop()  # 가장 무거운 사람 제거
-            answer += 1
-        else:  # 가장 무거운 사람만 태울 경우
-            people.pop()
-            answer += 1
-
+    
+    left = 0
+    right = len(people)-1
+    while (left != right):
+        if left>right:
+            break
+        else:
+            if(people[left]+people[right]<=limit):
+                answer += 1
+                left += 1
+                right -= 1
+            else:
+                answer+=1
+                right -=1
+    if left == right:
+        answer +=1
     return answer
