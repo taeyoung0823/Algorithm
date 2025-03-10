@@ -2,10 +2,6 @@ def solution(t, p):
     result = []
     count = 0
     for i in range(0,len(t)-len(p)+1):
-        result.append(t[i:i+len(p)])
-    number = int(p)
-    result = [int(num) for num in result]
-    for num in result:
-        if number >= num:
+        if int(p) >= int(t[i:i+len(p)]):
             count+=1
     return count
